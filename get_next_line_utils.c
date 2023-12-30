@@ -6,7 +6,7 @@
 /*   By: messkely <messkely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 09:30:56 by messkely          #+#    #+#             */
-/*   Updated: 2023/12/30 17:58:11 by messkely         ###   ########.fr       */
+/*   Updated: 2023/12/30 20:37:37 by messkely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_strchr(char *s, int c)
 	{
 		if (*s == (char)c)
 		{
-			s++;
+			// s++;
 			return ((char *)s);
 		}
 		s++;
