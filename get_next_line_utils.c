@@ -6,7 +6,7 @@
 /*   By: messkely <messkely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 09:30:56 by messkely          #+#    #+#             */
-/*   Updated: 2023/12/30 20:37:37 by messkely         ###   ########.fr       */
+/*   Updated: 2023/12/31 17:52:19 by messkely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,16 @@ size_t	ft_strlen(char *str)
 
 char	*ft_strchr(char *s, int c)
 {
-	if (!s)
-		return (ft_clear(s));
-	if (*s == '\0')
-		return ((char *)s);
+	int i;
+
+	i = 0;
+	if (s[i] == '\0')
+		return ((char *)&s[i]);
 	while (*s != '\0')
 	{
-		if (*s == (char)c)
-		{
-			// s++;
-			return ((char *)s);
-		}
-		s++;
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i++;
 	}
 	return (NULL);
 }
@@ -97,34 +95,11 @@ char	*ft_new_buff(char *buff)
 	return (str);
 }
 
-static char *ft_strcat(char *dst, const char *src)
-{
-    char *org_dst;
-
-    org_dst = dst;
-	while (*dst)
-		dst++;
-	while (*src)
-		*dst++ = *src++;
-	*dst = '\0';
-	return (org_dst);
-}
-
-static char *ft_strcpy(char *dst, const char *src)
-{
-    char *org_dst;
-
-    org_dst = dst;
-    while (*src)
-        *dst++ = *src++;
-    *dst = '\0';
-    return org_dst;
-}
-
-
 char *ft_strjoin(char *s1, char *s2)
 {
 	char *ptr;
+	int i = 0;
+	int j = 0;
 
 	if (!s1)
 	{
@@ -136,8 +111,18 @@ char *ft_strjoin(char *s1, char *s2)
 	ptr = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!ptr)
 		return (NULL);
-	ptr = ft_strcpy(ptr, s1);
-	ptr = ft_strcat(ptr, s2);
+	while (s1[i])
+	{
+		ptr[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+	{
+		ptr[i] = s2[j];
+		i++;
+		j++;
+	}
+	ptr[i] = '\0';
 	free(s1);
 	return (ptr);
 }
