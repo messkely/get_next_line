@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: messkely <messkely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/27 09:29:37 by messkely          #+#    #+#             */
-/*   Updated: 2024/01/03 09:36:47 by messkely         ###   ########.fr       */
+/*   Created: 2024/01/03 09:46:15 by messkely          #+#    #+#             */
+/*   Updated: 2024/01/03 10:46:35 by messkely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*ft_get_line(char *content)
 {
@@ -84,19 +84,21 @@ char	*get_next_line(int fd)
 {
 	char		*buff;
 	char		*line;
-	static char	*static_buff;
+	static char	*static_buff[4096];
 
 	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0 || fd > 4096)
 	{
-		static_buff = ft_clear(static_buff);
+		static_buff[fd] = ft_clear(static_buff[fd]);
 		buff = ft_clear(buff);
 		return (NULL);
 	}
-	static_buff = read_str(fd, static_buff, buff);
-	if (!static_buff)
-		return (ft_clear(static_buff));
-	line = ft_get_line(static_buff);
-	static_buff = new_str(static_buff);
+    if (!buff)
+        return (NULL);
+	static_buff[fd] = read_str(fd, static_buff[fd], buff);
+	if (!static_buff[fd])
+		return (ft_clear(static_buff[fd]));
+	line = ft_get_line(static_buff[fd]);
+	static_buff[fd] = new_str(static_buff[fd]);
 	return (line);
 }

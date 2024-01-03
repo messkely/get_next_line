@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: messkely <messkely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/27 09:30:56 by messkely          #+#    #+#             */
-/*   Updated: 2024/01/03 09:31:25 by messkely         ###   ########.fr       */
+/*   Created: 2024/01/03 09:46:54 by messkely          #+#    #+#             */
+/*   Updated: 2024/01/03 09:54:07 by messkely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_clear(char *str)
 {
