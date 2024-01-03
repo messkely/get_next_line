@@ -6,7 +6,7 @@
 /*   By: messkely <messkely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 09:46:15 by messkely          #+#    #+#             */
-/*   Updated: 2024/01/03 20:54:29 by messkely         ###   ########.fr       */
+/*   Updated: 2024/01/03 21:07:14 by messkely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,10 @@ char	*get_next_line(int fd)
 	static char	*static_buff[4096];
 
 	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0 || fd > 4096)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		if (fd >= 0 && BUFFER_SIZE <= 4096 && static_buff[fd])
-			static_buff[fd] = ft_clear(static_buff[fd]);	
+		if (fd >= 0 && static_buff[fd])
+			static_buff[fd] = ft_clear(static_buff[fd]);
 		buff = ft_clear(buff);
 		return (NULL);
 	}
