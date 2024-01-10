@@ -6,7 +6,7 @@
 /*   By: messkely <messkely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 09:46:15 by messkely          #+#    #+#             */
-/*   Updated: 2024/01/04 11:46:03 by messkely         ###   ########.fr       */
+/*   Updated: 2024/01/09 12:29:59 by messkely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,18 +84,17 @@ char	*get_next_line(int fd)
 {
 	char		*buff;
 	char		*line;
-	static char	*static_buff[4096];
+	static char	*static_buff[10240];
 
-	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || fd >= 10240 || BUFFER_SIZE > 2147483647 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		if (fd >= 0 && static_buff[fd])
+		if (fd >= 0 && fd < 10240 && static_buff[fd])
 			static_buff[fd] = ft_clear(static_buff[fd]);
-		buff = ft_clear(buff);
 		return (NULL);
 	}
-    if (!buff)
-        return (NULL);
+	buff = malloc(((size_t)BUFFER_SIZE + 1) * sizeof(char));
+	if (!buff)
+		return (NULL);
 	static_buff[fd] = read_str(fd, static_buff[fd], buff);
 	if (!static_buff[fd])
 		return (ft_clear(static_buff[fd]));

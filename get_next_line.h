@@ -6,7 +6,7 @@
 /*   By: messkely <messkely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 09:30:14 by messkely          #+#    #+#             */
-/*   Updated: 2024/01/03 09:32:31 by messkely         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:52:12 by messkely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include <string.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1000

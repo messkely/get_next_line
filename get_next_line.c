@@ -6,7 +6,7 @@
 /*   By: messkely <messkely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 09:29:37 by messkely          #+#    #+#             */
-/*   Updated: 2024/01/05 18:33:15 by messkely         ###   ########.fr       */
+/*   Updated: 2024/01/09 12:29:15 by messkely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,15 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*static_buff;
 
-	buff = malloc(((size_t)BUFFER_SIZE + 1) * sizeof(char));
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > 2147483647 || read(fd, 0, 0) < 0)
 	{
-		static_buff = ft_clear(static_buff);
-		buff = ft_clear(buff);
+		if (static_buff)
+			static_buff = ft_clear(static_buff);
 		return (NULL);
 	}
+	buff = malloc(((size_t)BUFFER_SIZE + 1) * sizeof(char));
+	if (!buff)
+		return (NULL);
 	static_buff = read_str(fd, static_buff, buff);
 	if (!static_buff)
 		return (ft_clear(static_buff));
@@ -100,11 +102,3 @@ char	*get_next_line(int fd)
 	static_buff = new_str(static_buff);
 	return (line);
 }
-
-// int main()
-// {
-// 	int fd = open("test.txt",O_RDONLY);
-// 	char *line = get_next_line(fd);
-// 	printf("%s",line);
-// 	close(fd);
-// }
